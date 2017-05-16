@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<beans xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"  
+    xmlns:context="http://www.springframework.org/schema/context"  
+    xmlns:mvc="http://www.springframework.org/schema/mvc"  
+    xsi:schemaLocation="http://www.springframework.org/schema/beans    
+                        http://www.springframework.org/schema/beans/spring-beans-3.1.xsd    
+                        http://www.springframework.org/schema/context    
+                        http://www.springframework.org/schema/context/spring-context-3.1.xsd    
+                        http://www.springframework.org/schema/mvc    
+                        http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">  
+                        
+     <!-- 自动扫描该包，使SpringMVC认为包下用了@controller注解的类是控制器 -->  
+    <context:component-scan base-package="com.wei.wechat.web" />  
+    
+    <!-- 启动SpringMVC的注解功能，完成请求和注解POJO的映射 -->  
+    <bean  class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />  
+    
+    <!-- 定义跳转的文件的前后缀 ，视图模式配置-->
+    <!-- jsp -->  
+	<!-- <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">  
+        <property name="prefix" value="/pages/" />  
+        <property name="suffix" value=".jsp" />  
+    </bean>  -->
+    
+    <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">  
+	    <property name="templateLoaderPath" value="/pages/"/> 
+	    <property name="defaultEncoding" value="utf-8" />
+        <property name="freemarkerSettings">
+            <props>
+                <prop key="template_update_delay">10</prop>
+                <prop key="locale">zh_CN</prop>
+                <prop key="datetime_format">yyyy-MM-dd</prop><!-- 时间格式化 -->
+                <prop key="date_format">yyyy-MM-dd</prop>
+                <prop key="number_format">#.##</prop>
+            </props>
+        </property> 
+	</bean>  
+  
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">  
+	    <property name="suffix" value=".html"/>  
+	    <property name="contentType" value="text/html; charset=UTF-8"/>  
+	    <property name="requestContextAttribute" value="rc" />
+	</bean>
+                        
+</beans>                        
