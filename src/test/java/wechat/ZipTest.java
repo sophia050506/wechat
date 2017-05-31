@@ -15,13 +15,13 @@ import java.util.zip.ZipInputStream;
 public class ZipTest {
 
 	public static void main(String[] args) {
-		String line = "                           ";
+		String line = "1|2|3|4|5|6|7|8|9|10|11|||";
 //		String lines = line.replaceAll("\\.00000","").replaceAll("\\s{2,}", " ").replaceAll(" ", "|");
 //		System.out.println(lines);
 		
 		
-		String[] lines = line.replaceAll("\\.00000","").replaceAll("\\s{2,}", " ").replaceAll(" ", "|").split("\\|");
-		//System.out.println(lines[2]);
+		String[] lines = line.split("\\|");
+		System.out.println(lines.length);
 		for(String c:lines){
 			
 			System.out.println(c);
