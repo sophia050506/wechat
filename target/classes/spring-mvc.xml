@@ -42,5 +42,26 @@
 	    <property name="contentType" value="text/html; charset=UTF-8"/>  
 	    <property name="requestContextAttribute" value="rc" />
 	</bean>
+	
+	<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">  
+	    <property name="maxActive"  value="50" />  
+	    <property name="maxIdle" value="10" />  
+	    <property name="maxWait" value="1000" />  
+	    <property name="testOnBorrow"  value="true"/>  
+	</bean>
+	
+	<bean id="jedisShardInfo" class="redis.clients.jedis.JedisShardInfo">  
+	    <constructor-arg index="0" value="192.168.88.128" />  
+	    <constructor-arg index="1" value="6379" type="int"/>  
+	</bean>
+	
+	<bean id="jedis" class="redis.clients.jedis.ShardedJedisPool" factory-method="getResource">  
+	    <constructor-arg index="0" ref="jedisPoolConfig" />  
+	    <constructor-arg index="1">  
+	        <list>  
+	            <ref bean="jedisShardInfo" />  
+	        </list>  
+	    </constructor-arg>  
+	</bean> 
                         
 </beans>                        
