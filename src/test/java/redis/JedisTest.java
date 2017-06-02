@@ -1,4 +1,4 @@
-package wechat;
+package redis;
 
 import redis.clients.jedis.Jedis;
 
